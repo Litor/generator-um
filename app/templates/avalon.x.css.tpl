@@ -1,0 +1,3 @@
+.oni-<%=widgetName %>-container{
+
+}
