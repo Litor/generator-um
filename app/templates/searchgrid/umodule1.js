@@ -26,9 +26,11 @@ define(function(require, exports, module) {
     },
 
     initAdvancedQueryAndTable: function() {
+      var cardTpl = utils.loadCompiledPage('<%=moduleName %>CardTpl', require);
       var tableOptions = {
         pagePath: bs.api.pageModel,
         action: 'TABLE',
+        template: cardTpl,
         customColumns: this.getCustomColumns()
       };
       var searchData = WIS_EMAP_SERV.getModel(bs.api.advancedQueryModel, 'TABLE', "search");
@@ -38,7 +40,7 @@ define(function(require, exports, module) {
       });
       $('#<%=moduleName %>-index-search').on('search', this.searchCallback);
 
-      $('#<%=moduleName %>-index-table').emapdatatable(tableOptions);
+      $('#<%=moduleName %>-index-table').emapGrid(tableOptions);
     },
 
     searchCallback: function(e, data, opts) {
