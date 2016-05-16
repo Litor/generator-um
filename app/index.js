@@ -42,6 +42,12 @@ module.exports = yeoman.generators.Base.extend({
         }, {
           name: 'searchgrid',
           value: 'searchgrid',
+        }, {
+          name: 'searchcard',
+          value: 'searchcard',
+        }, {
+          name: 'emapform',
+          value: 'emapform',
         }]
       }];
 
@@ -86,6 +92,23 @@ module.exports = yeoman.generators.Base.extend({
           this.template(this.type + '/umodule1.js', this.moduleName + '/' + this.moduleName + '.js');
           this.template(this.type + '/umodule1BS.js', this.moduleName + '/' + this.moduleName + 'BS.js');
           this.template(this.type + '/umodule1CardTpl.html', this.moduleName + '/' + this.moduleName + 'CardTpl.html');
+          this.template(this.type + '/umodule1IndexPage.html', this.moduleName + '/' + this.moduleName + 'IndexPage.html');
+          break;
+
+        case 'searchcard':
+          this.template(this.type + '/mock.js', this.moduleName + '/mock.js');
+          this.template(this.type + '/umodule1.css', this.moduleName + '/' + this.moduleName + '.css');
+          this.template(this.type + '/umodule1.js', this.moduleName + '/' + this.moduleName + '.js');
+          this.template(this.type + '/umodule1BS.js', this.moduleName + '/' + this.moduleName + 'BS.js');
+          this.template(this.type + '/umodule1CardTpl.html', this.moduleName + '/' + this.moduleName + 'CardTpl.html');
+          this.template(this.type + '/umodule1IndexPage.html', this.moduleName + '/' + this.moduleName + 'IndexPage.html');
+          break;
+
+        case 'emapform':
+          this.template(this.type + '/mock.js', this.moduleName + '/mock.js');
+          this.template(this.type + '/umodule1.css', this.moduleName + '/' + this.moduleName + '.css');
+          this.template(this.type + '/umodule1.js', this.moduleName + '/' + this.moduleName + '.js');
+          this.template(this.type + '/umodule1BS.js', this.moduleName + '/' + this.moduleName + 'BS.js');
           this.template(this.type + '/umodule1IndexPage.html', this.moduleName + '/' + this.moduleName + 'IndexPage.html');
           break;
       }
