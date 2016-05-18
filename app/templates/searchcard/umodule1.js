@@ -31,7 +31,8 @@ define(function(require, exports, module) {
         pagePath: bs.api.pageModel,
         action: 'TABLE',
         template: cardTpl,
-        pageable: false
+        pageable: false,
+        cardBeforeRender: function(row) {}
       };
       var searchData = WIS_EMAP_SERV.getModel(bs.api.advancedQueryModel, 'TABLE', "search");
 
@@ -40,11 +41,11 @@ define(function(require, exports, module) {
       });
       $('#<%=moduleName %>-index-search').on('search', this.searchCallback);
 
-      $('#<%=moduleName %>-index-table').emapCard(tableOptions);
+      $('#<%=moduleName %>-index-card').emapCard(tableOptions);
     },
 
     searchCallback: function(e, data, opts) {
-      $('#<%=moduleName %>-index-table').emapCard('reload', {
+      $('#<%=moduleName %>-index-card').emapCard('reload', {
         querySetting: JSON.stringify(data)
       });
     },

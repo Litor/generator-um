@@ -51,6 +51,9 @@ define(function(require, exports, module) {
 
     getCustomColumns: function() {
       var customColumns = [{
+        colIndex: '0',
+        type: 'checkbox'
+      }, {
         colIndex: '100',
         type: 'tpl',
         column: {
