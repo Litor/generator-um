@@ -25,10 +25,10 @@ define(function(require, exports, module) {
 
     initTab: function() {
       var self = this;
-      var indexView = utils.loadCompiledPage('<%=moduleName %>IndexPage', require);
+      var tabTpl = utils.loadCompiledPage('<%=moduleName %>TabTpl', require);
 
       bs.getTabInfo().done(function(model) {
-        self.$rootElement.html(indexView.render(model), true);
+        $('.<%=moduleName %>-tab-container').html(tabTpl.render(model), true);
         $('.<%=moduleName %>-tab').jqxTabs({
           position: 'top'
         });
