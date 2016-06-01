@@ -30,7 +30,7 @@ define(function(require, exports, module) {
       bs.getWizardInfo().done(function(model) {
         $('.<%=moduleName %>-index-wizard').bhWizard({
           items: model.wizard,
-          active: '0',
+          active2: '0',
           change: function(item) {
             var $element = $('.<%=moduleName %>-index-content');
 
