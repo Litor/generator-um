@@ -32,7 +32,7 @@ module.exports = yeoman.generators.Base.extend({
         name: 'type',
         type: 'list',
         message: "What's the page of the page(tab, step,searchtable,searchgrid)?",
-        default: 'searchtable',
+        default: 'simple',
         choices: [{
           name: 'simple',
           value: 'simple'
