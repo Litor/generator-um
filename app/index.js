@@ -17,7 +17,7 @@ module.exports = yeoman.generators.Base.extend({
 
       var moduleNamePrompts = [{
         name: 'moduleName',
-        message: "What's the name of you module?",
+        message: "What's the name of you module/ page?",
         default: 'moduleName'
       }];
 
