@@ -1,6 +1,6 @@
 {
   "name": "generator-um",
-  "version": "1.01",
+  "version": "1.0.2",
   "description": "Yeoman generator for wisedu ubase page",
   "license": "MIT",
   "main": "app/index.js",

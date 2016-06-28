@@ -13,35 +13,36 @@ define(function(require, exports, module) {
     },
 
     getRowDataDetails: function() {
-      var def = $.Deferred();
+      return utils.fetch({
+        url: bs.api.rowDataDetailUrl,
+        data: {},
+        method: 'get',
 
-      utils.doAjax(bs.api.rowDataDetailUrl, null, 'get').done(function(res) {
+        /***parser用于对接口返回的数据做进一步处理***/
+        parser: function(res) {
 
-        def.resolve(res);
-      }).fail(function(res) {
-        def.reject(res);
+        }
       });
-
-      return def.promise();
     },
 
     getWizardInfo: function() {
-      var def = $.Deferred();
-      var res = {
-        wizard: [{
-          stepId: '0',
-          title: 'step0'
-        }, {
-          stepId: '1',
-          title: 'step1'
-        }, {
-          stepId: '2',
-          title: 'step2'
-        }]
-      };
-      def.resolve(res);
-
-      return def.promise();
+      return utils.fetch({
+        parser: function(res) {
+          var res = {
+            wizard: [{
+              stepId: '0',
+              title: 'step0'
+            }, {
+              stepId: '1',
+              title: 'step1'
+            }, {
+              stepId: '2',
+              title: 'step2'
+            }]
+          };
+          return res;
+        }
+      });
     }
   };
 
