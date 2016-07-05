@@ -49,11 +49,17 @@ module.exports = yeoman.generators.Base.extend({
           name: 'emapform',
           value: 'emapform',
         }, {
+          name: 'emapformoutline',
+          value: 'emapformoutline',
+        }, {
           name: 'propertydialog',
           value: 'propertydialog',
         }, {
           name: 'tab',
           value: 'tab',
+        }, {
+          name: 'tabiframe',
+          value: 'tabiframe',
         }, {
           name: 'wizard',
           value: 'wizard',
@@ -121,7 +127,24 @@ module.exports = yeoman.generators.Base.extend({
           this.template(this.type + '/umodule1IndexPage.html', this.moduleName + '/' + this.moduleName + 'IndexPage.html');
           break;
 
+        case 'emapformoutline':
+          this.template(this.type + '/mock.js', this.moduleName + '/mock.js');
+          this.template(this.type + '/umodule1.css', this.moduleName + '/' + this.moduleName + '.css');
+          this.template(this.type + '/umodule1.js', this.moduleName + '/' + this.moduleName + '.js');
+          this.template(this.type + '/umodule1BS.js', this.moduleName + '/' + this.moduleName + 'BS.js');
+          this.template(this.type + '/umodule1IndexPage.html', this.moduleName + '/' + this.moduleName + 'IndexPage.html');
+          break;
+
         case 'tab':
+          this.template(this.type + '/mock.js', this.moduleName + '/mock.js');
+          this.template(this.type + '/umodule1.css', this.moduleName + '/' + this.moduleName + '.css');
+          this.template(this.type + '/umodule1.js', this.moduleName + '/' + this.moduleName + '.js');
+          this.template(this.type + '/umodule1BS.js', this.moduleName + '/' + this.moduleName + 'BS.js');
+          this.template(this.type + '/umodule1IndexPage.html', this.moduleName + '/' + this.moduleName + 'IndexPage.html');
+          this.template(this.type + '/umodule1TabTpl.html', this.moduleName + '/' + this.moduleName + 'TabTpl.html');
+          break;
+
+        case 'tabiframe':
           this.template(this.type + '/mock.js', this.moduleName + '/mock.js');
           this.template(this.type + '/umodule1.css', this.moduleName + '/' + this.moduleName + '.css');
           this.template(this.type + '/umodule1.js', this.moduleName + '/' + this.moduleName + '.js');
