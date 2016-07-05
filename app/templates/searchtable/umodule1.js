@@ -34,12 +34,14 @@ define(function(require, exports, module) {
       var tableOptions = {
         pagePath: bs.api.pageModel,
         action: 'TABLE',
+        //searchElement: $('#<%=moduleName %>-index-search'),
         customColumns: this.getCustomColumns()
       };
       var searchData = WIS_EMAP_SERV.getModel(bs.api.advancedQueryModel, 'TABLE', "search");
 
       $('#<%=moduleName %>-index-search').emapAdvancedQuery({
-        data: searchData
+        data: searchData,
+        //showTotalNum: true
       });
       $('#<%=moduleName %>-index-search').on('search', this.searchCallback);
 
