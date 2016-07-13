@@ -32,11 +32,11 @@ define(function(require, exports, module) {
             tabs: [{
               index: 0,
               title: '待发布',
-              src:'http://res.wisedu.com'
+              src: 'http://res.wisedu.com'
             }, {
               index: 1,
               title: '已发布',
-              src:'http://www.baidu.com'
+              src: 'http://www.baidu.com'
             }]
           };
         }

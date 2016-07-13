@@ -1,13 +1,13 @@
 <div class="<%=moduleName %>-tab">
-  <ul>
+    <ul>
+        {{#tabs}}
+        <li>{{title}}</li>
+        {{/tabs}}
+    </ul>
     {{#tabs}}
-    <li>{{title}}</li>
+    <div class="<%=moduleName %>-tab-content-{{index}} bh-mt-8" data-x-src="{{src}}">
+        <iframe width="100%" frameborder="no" src="{{src}}" style="display:none;">
+        </iframe>
+    </div>
     {{/tabs}}
-  </ul>
-  {{#tabs}}
-  <div class="<%=moduleName %>-tab-content-{{index}} bh-mt-8" data-x-src="{{src}}">
-    <iframe width="100%" frameborder="no" src="{{src}}" style="display:none;">
-    </iframe>
-  </div>
-  {{/tabs}}
 </div>

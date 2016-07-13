@@ -24,7 +24,7 @@ define(function(require, exports, module) {
       this.$rootElement.html(indexView.render({}), true);
       this.initAdvancedQueryAndTable();
       <%}%>
-     /********页面内事件通过eventMap统一管理********/
+      /********页面内事件通过eventMap统一管理********/
       this.eventMap = {
         '[data-action="编辑"]': this.actionEdit
       };

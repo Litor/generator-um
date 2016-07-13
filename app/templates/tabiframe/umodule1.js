@@ -1,4 +1,4 @@
-define(function (require, exports, module) {
+define(function(require, exports, module) {
 
   var utils = require('utils');
   var bs = require('./<%=moduleName %>BS');
@@ -7,7 +7,7 @@ define(function (require, exports, module) {
   //var sub1 = require('./sub1/sub1');
 
   var viewConfig = {
-    initialize: function () {
+    initialize: function() {
       /********注册子页面********/
       //this.pushSubView([sub1, sub2]);
       var self = this;
@@ -15,7 +15,7 @@ define(function (require, exports, module) {
       <%if(isPaperDialog){ %>
       $.bhPaperPileDialog.show({
         content: indexView.render(),
-        render: function () {
+        render: function() {
           self.initTab();
         }
       });
@@ -30,25 +30,25 @@ define(function (require, exports, module) {
       };
     },
 
-    initTab: function () {
+    initTab: function() {
       var self = this;
       var tabTpl = utils.loadCompiledPage('<%=moduleName %>TabTpl', require);
 
-      bs.getTabInfo().done(function (model) {
+      bs.getTabInfo().done(function(model) {
         $('.<%=moduleName %>-tab-container').html(tabTpl.render(model), true);
         $('.<%=moduleName %>-tab').jqxTabs({
           position: 'top'
         });
 
         self.initTabContent(0);
-        $('.<%=moduleName %>-tab').on('tabclick', function (event) {
+        $('.<%=moduleName %>-tab').on('tabclick', function(event) {
           var tabIndex = event.args.item;
           self.initTabContent(tabIndex);
         });
       });
     },
 
-    initTabContent: function (tabIndex) {
+    initTabContent: function(tabIndex) {
       var $element = $('.<%=moduleName %>-tab-content-' + tabIndex);
       //heightOffset 根据页面的实际高度微调 保证页面不要出现双滚动条 只在iframe页面内滚动
       var heightOffset = 330;
