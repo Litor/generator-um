@@ -51,6 +51,8 @@ define(function(require, exports, module) {
       var $element = $('.<%=moduleName %>-tab-content-' + tabIndex);
       switch (tabIndex) {
         case 0:
+          //sub1.$rootElement = $element;
+          //sub1.initialize();
           break;
       }
     }

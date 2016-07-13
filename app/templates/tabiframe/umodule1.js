@@ -54,10 +54,6 @@ define(function (require, exports, module) {
       var heightOffset = 330;
       $element.find('iframe').show();
       $element.find('iframe').height($(window).height() - heightOffset);
-      switch (tabIndex) {
-        case 0:
-          break;
-      }
     }
   };
 
