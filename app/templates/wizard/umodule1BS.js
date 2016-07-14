@@ -28,7 +28,7 @@ define(function(require, exports, module) {
     getWizardInfo: function() {
       return utils.fetch({
         parser: function(res) {
-          var res = {
+          res = {
             wizard: [{
               stepId: '0',
               title: 'step0'

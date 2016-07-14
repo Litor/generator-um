@@ -12,12 +12,12 @@ module.exports = yeoman.generators.Base.extend({
     askFor: function() {
       var done = this.async();
 
-      this.log(yosay('Create your own ' + chalk.red('Yeoman') + ' generator with superpowers!'));
+      this.log(yosay('Create your own ' + chalk.red('ubase page') + ' generator with superpowers!'));
 
 
       var moduleNamePrompts = [{
         name: 'moduleName',
-        message: "What's the name of you module / page?",
+        message: "What's the name of you app / page?",
         default: 'moduleName'
       }];
 
@@ -31,9 +31,12 @@ module.exports = yeoman.generators.Base.extend({
       var prompts = [{
         name: 'type',
         type: 'list',
-        message: "What's the page of the page(tab, step,searchtable,searchgrid)?",
+        message: "What's the type do you want?",
         default: 'simple',
         choices: [{
+          name: 'ubase',
+          value: 'ubase'
+        }, {
           name: 'simple',
           value: 'simple'
         }, {
@@ -71,11 +74,14 @@ module.exports = yeoman.generators.Base.extend({
         this.prompt(prompts, function(props) {
           this.type = props.type;
 
-          this.prompt(paperDialogPrompts, function(props) {
-            this.isPaperDialog = props.isPaperDialog;
-
+          if (this.type === 'ubase') {
             done();
-          }.bind(this));
+          } else {
+            this.prompt(paperDialogPrompts, function(props) {
+              this.isPaperDialog = props.isPaperDialog;
+              done();
+            }.bind(this));
+          }
         }.bind(this));
       }.bind(this));
     }
@@ -85,6 +91,48 @@ module.exports = yeoman.generators.Base.extend({
     app: function() {
       this.mkdir(this.moduleName);
       switch (this.type) {
+        case 'ubase':
+          this.mkdir(this.moduleName + '/modules');
+          this.mkdir(this.moduleName + '/public/commonpage');
+          this.mkdir(this.moduleName + '/public/css');
+          this.mkdir(this.moduleName + '/public/images');
+          this.copy(
+            this.templatePath(this.type + '/style.css'),
+            this.destinationPath(this.moduleName + '/public/css/style.css')
+          );
+          this.copy(
+            this.templatePath(this.type + '/logo.png'),
+            this.destinationPath(this.moduleName + '/public/images/logo.png')
+          );
+          this.copy(
+            this.templatePath(this.type + '/user.png'),
+            this.destinationPath(this.moduleName + '/public/images/user.png')
+          );
+          this.copy(
+            this.templatePath(this.type + '/config.js'),
+            this.destinationPath(this.moduleName + '/config.js')
+          );
+          this.copy(
+            this.templatePath(this.type + '/.editorconfig'),
+            this.destinationPath(this.moduleName + '/.editorconfig')
+          );
+          this.copy(
+            this.templatePath(this.type + '/.eslintrc'),
+            this.destinationPath(this.moduleName + '/.eslintrc')
+          );
+          this.copy(
+            this.templatePath(this.type + '/gulpfile.js'),
+            this.destinationPath(this.moduleName + '/gulpfile.js')
+          );
+          this.copy(
+            this.templatePath(this.type + '/index.html'),
+            this.destinationPath(this.moduleName + '/index.html')
+          );
+          this.copy(
+            this.templatePath(this.type + '/package.json'),
+            this.destinationPath(this.moduleName + '/package.json')
+          );
+          break;
         case 'simple':
           this.template(this.type + '/mock.js', this.moduleName + '/mock.js');
           this.template(this.type + '/umodule1.css', this.moduleName + '/' + this.moduleName + '.css');
