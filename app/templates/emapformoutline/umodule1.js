@@ -7,19 +7,18 @@ define(function(require) {
     initialize: function() {
       var self = this;
       var indexView = utils.loadCompiledPage('<%=moduleName %>IndexPage', require);
-      <%if(isPaperDialog){ %>
+<%if(isPaperDialog){ %>
       $.bhPaperPileDialog.show({
         content: indexView.render(),
         render: function() {
           self.initForm();
         }
       });
-      <%}%>
-      <%if(!isPaperDialog){%>
+<%}else{%>
       this.$rootElement.html(indexView.render({}), true);
       this.initForm();
       this.resetFormOutline();
-      <%}%>
+<%}%>
       this.eventMap = {
 
       };

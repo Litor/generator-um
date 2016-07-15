@@ -9,21 +9,20 @@ define(function(require) {
   var viewConfig = {
     initialize: function() {
       /********注册子页面********/
-      //this.pushSubView([sub1, sub2]);
+      //this.pushSubView([sub1]);
       var self = this;
       var indexView = utils.loadCompiledPage('<%=moduleName %>IndexPage', require);
-      <%if(isPaperDialog){ %>
+<%if(isPaperDialog){ %>
       $.bhPaperPileDialog.show({
         content: indexView.render(),
         render: function() {
           self.initWizard();
         }
       });
-      <%}%>
-      <%if(!isPaperDialog){%>
+<%}else{%>
       this.$rootElement.html(indexView.render({}), true);
       this.initWizard();
-      <%}%>
+<%}%>
       /********页面内事件通过eventMap统一管理********/
       this.eventMap = {
         //'[data-action="添加"]': this.actionAdd
@@ -42,8 +41,11 @@ define(function(require) {
 
             switch (item.stepId) {
               case '0':
-
+                //sub1.$rootElement = $element;
+                //sub1.initialize();
                 break;
+
+              default:;
             }
           }
         });
