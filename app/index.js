@@ -14,11 +14,16 @@ module.exports = yeoman.generators.Base.extend({
 
       this.log(yosay('Create your own ' + chalk.red('ubase page') + ' generator with superpowers!'));
 
-
       var moduleNamePrompts = [{
         name: 'moduleName',
-        message: "What's the name of you app / page?",
-        default: 'moduleName'
+        message: "What's the name of you module / page?",
+        default: 'page name'
+      }];
+
+      var moduleNamePromptsApp = [{
+        name: 'moduleName',
+        message: "What's the name of you app?",
+        default: 'app name'
       }];
 
       var paperDialogPrompts = [{
@@ -69,20 +74,25 @@ module.exports = yeoman.generators.Base.extend({
         }]
       }];
 
-      this.prompt(moduleNamePrompts, function(props) {
-        this.moduleName = props.moduleName;
-        this.prompt(prompts, function(props) {
-          this.type = props.type;
+      this.prompt(prompts, function(props) {
+        this.type = props.type;
 
-          if (this.type === 'ubase') {
+        if (this.type === 'ubase') {
+          this.prompt(moduleNamePromptsApp, function(props) {
+            this.moduleName = props.moduleName;
             done();
-          } else {
+          }.bind(this));
+
+        } else {
+          this.prompt(moduleNamePrompts, function(props) {
+            this.moduleName = props.moduleName;
+
             this.prompt(paperDialogPrompts, function(props) {
               this.isPaperDialog = props.isPaperDialog;
               done();
             }.bind(this));
-          }
-        }.bind(this));
+          }.bind(this));
+        }
       }.bind(this));
     }
   },
