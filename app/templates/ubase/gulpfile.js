@@ -46,13 +46,13 @@ gulp.task('clean', function() {
 
 gulp.task('generateConfigFile', function() {
   var modulesDir = fs.readdirSync('./modules');
-  var modulesArray = ["'config'"];
+  var modulesArray = [];
 
   for (var i = 0; i < modulesDir.length; i++) {
     modulesArray.push("'./modules/" + modulesDir[i] + "/" + modulesDir[i] + "'");
   }
 
-  var str = 'require([' + modulesArray.join(',\r\t') + '])';
+  var str = "var ___divider____ = '___';require([" + modulesArray.join(',\r\t') + "])";
   fs.writeFileSync('./buildConfig.js', str);
 });
 
@@ -72,38 +72,52 @@ gulp.task('mergeModules', function() {
       exclude: ['configUtils', 'router', 'utils']
     }))
     .pipe(concat("app.js"))
-    .pipe(uglify())
     .pipe(gulp.dest("dest/"));
 });
 
-function getHtmlTeplate(basedir, dir, output, relativeDir) {
-  var moduleDir = fs.readdirSync(basedir + dir);
+gulp.task('removeConfigInApp', function() {
+  var fileContent = fs.readFileSync('./dest/app.js', "utf-8");
+  var realFileContent = '';
+
+  var index = fileContent.indexOf("var ___divider____ = '___';");
+  realFileContent = fileContent.substr(0, index);
+
+  fs.writeFileSync("./dest/app.js", realFileContent, "utf-8");
+});
+
+function getHtmlTeplate(basedir, output) {
+  var moduleDir = fs.readdirSync(basedir);
   for (var j = 0; j < moduleDir.length; j++) {
-    getHtmlTeplateInner(basedir, dir, output, relativeDir, moduleDir[j]);
+    getHtmlTeplateInner(basedir, output, moduleDir[j]);
   }
 }
 
-function getHtmlTeplateInner(basedir, dir, output, relativeDir, moduleDir) {
+function getHtmlTeplateInner(basedir, output, moduleDir) {
   if (moduleDir.indexOf('.html') > 0) {
     var fileName = moduleDir.substring(0, moduleDir.indexOf('.html'));
-    var fileContent = fs.readFileSync(basedir + dir + '/' + moduleDir, "utf-8");
+    var fileContent = fs.readFileSync(basedir + '/' + moduleDir, "utf-8");
     fileContent = hogan.compile(fileContent, {
       asString: true
     });
-    output.push('__Template["' + relativeDir + fileName + '"]=' + fileContent + ';');
+    output.push('__Template["' + basedir + fileName + '"]=' + fileContent + ';');
   } else if (moduleDir.indexOf('.') === -1) {
-    getHtmlTeplate(basedir + dir + '/', moduleDir, output, dir + '/');
+    getHtmlTeplate(basedir + moduleDir + '/', output);
   }
 }
 
 gulp.task('template', function() {
   var modulesDir = fs.readdirSync('./modules');
+  var commonpage = fs.readdirSync('./public/commonpage');
   var output = [
     "var __Template={};"
   ];
 
   for (var i = 0; i < modulesDir.length; i++) {
-    getHtmlTeplate('./modules/', modulesDir[i], output, '');
+    getHtmlTeplate('./modules/' + modulesDir[i] + '/', output);
+  }
+
+  for (var i = 0; i < commonpage.length; i++) {
+    getHtmlTeplate('./public/commonpage/' + commonpage[i] + '/', output);
   }
 
   fs.writeFileSync("./dest/template.js", output.join('\r'), "utf-8");
@@ -124,14 +138,14 @@ gulp.task('buildappcss', function() {
 });
 
 gulp.task('generateFixedConfigFile', function() {
-  var modulesArray = ["'config'"];
+  var modulesArray = [];
 
   var str = 'require([' + modulesArray.join(',\r\t') + '])';
   fs.writeFileSync('./buildConfig.js', str);
 });
 
 gulp.task('fixedConfigWrap', function() {
-  return gulp.src(["./config.js"])
+  return gulp.src([])
     .pipe(amdOptimize.src("buildConfig", {
       findNestedDependencies: false
     }))
@@ -140,9 +154,9 @@ gulp.task('fixedConfigWrap', function() {
 });
 
 gulp.task('clearDest', function() {
-  return del(['dest/**/*', '!dest/package.js', '!dest/all.css', '!dest/appcore.js', '!dest/appcore-min.js', '!dest/commonlib.js']);
+  return del(['buildConfig.js', 'dest/**/*', '!dest/package.js', '!dest/all.css', '!dest/appcore.js', '!dest/appcore-min.js', '!dest/commonlib.js']);
 });
 
 gulp.task('build', function() {
-  runSequence('buildappcss', 'generateConfigFile', 'generateMockFile', 'mergeModules', 'generateFixedConfigFile', 'fixedConfigWrap', 'template', 'mergetemplate', 'clearDest');
+  runSequence('buildappcss', 'generateConfigFile', 'generateMockFile', 'mergeModules', 'removeConfigInApp', 'generateFixedConfigFile', 'fixedConfigWrap', 'template', 'mergetemplate', 'clearDest');
 });
