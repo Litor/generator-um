@@ -4,7 +4,6 @@ var runSequence = require('run-sequence');
 var concat = require('gulp-concat');
 var minifyCss = require('gulp-minify-css');
 var del = require('del');
-var zip = require('gulp-zip');
 var amdOptimize = require("amd-optimize");
 var uglify = require('gulp-uglify');
 var fs = require('fs');
@@ -28,12 +27,6 @@ gulp.task('concat_css', function() {
   return gulp.src(['public/css/framework.css', 'modules/**/*.css', 'public/commonpage/**/*.css'])
     .pipe(concat('base.css'))
     .pipe(gulp.dest('public/css'));
-});
-
-gulp.task('zip', function() {
-  return gulp.src('dest/**')
-    .pipe(zip('FEApp.zip'))
-    .pipe(gulp.dest('dest'));
 });
 
 gulp.task('copy_to_dest', function() {
@@ -131,7 +124,7 @@ gulp.task('mergetemplate', function() {
 });
 
 gulp.task('buildappcss', function() {
-  return gulp.src(['./public/css/base.js', './public/css/style.css'])
+  return gulp.src(['./public/css/base.css', './public/css/style.css'])
     .pipe(concat('all.css'))
     .pipe(minifyCss())
     .pipe(gulp.dest("dest/"));
