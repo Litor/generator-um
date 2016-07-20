@@ -16,7 +16,6 @@ define(function(require) {
       return utils.fetch({
         url: bs.api.rowDataDetailUrl,
         data: {},
-        method: 'get',
 
         /***parser用于对接口返回的数据做进一步处理***/
         parser: function(res) {
