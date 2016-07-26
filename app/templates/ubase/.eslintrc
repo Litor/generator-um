@@ -150,7 +150,7 @@
     "padded-blocks": 0,
     "prefer-const": 0,
     "quote-props": 0,
-    "quotes": [1, "single", "avoid-escape"],
+    "quotes": [0, "single", "avoid-escape"],
     "radix": 2,
     "semi": [2, "always"],
     "semi-spacing": 0,

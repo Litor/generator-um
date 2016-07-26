@@ -109,8 +109,8 @@ gulp.task('template', function() {
     getHtmlTeplate('./modules/' + modulesDir[i] + '/', output);
   }
 
-  for (var i = 0; i < commonpage.length; i++) {
-    getHtmlTeplate('./public/commonpage/' + commonpage[i] + '/', output);
+  for (var j = 0; j < commonpage.length; j++) {
+    getHtmlTeplate('./public/commonpage/' + commonpage[j] + '/', output);
   }
 
   fs.writeFileSync("./dest/template.js", output.join('\r'), "utf-8");
