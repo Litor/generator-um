@@ -74,7 +74,7 @@ define(function(require) {
     },
 
     actionEdit: function(event) {
-      var wid = $(event.target).attr('data-x-wid');
+      var wid = $(event.currentTarget).attr('data-x-wid');
 
     }
 
