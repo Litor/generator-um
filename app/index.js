@@ -119,6 +119,14 @@ module.exports = yeoman.generators.Base.extend({
             this.destinationPath(this.moduleName + '/public/images/user.png')
           );
           this.copy(
+            this.templatePath(this.type + '/girl.png'),
+            this.destinationPath(this.moduleName + '/public/images/girl.png')
+          );
+          this.copy(
+            this.templatePath(this.type + '/boy.png'),
+            this.destinationPath(this.moduleName + '/public/images/boy.png')
+          );
+          this.copy(
             this.templatePath(this.type + '/config.js'),
             this.destinationPath(this.moduleName + '/config.js')
           );
