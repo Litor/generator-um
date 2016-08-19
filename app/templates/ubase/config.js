@@ -61,11 +61,11 @@ define(function(require, exports, module) {
       }, {
         "text": "就业管理人员"
       }],
-      "logo": "./public/images/logo.png",
+      //"logo": "http://res.wisedu.com/images/logo.png",
       "icons": ["icon-apps"],
-      "userImage": "./public/images/user.png",
+      //"userImage": "http://res.wisedu.com/images/user.png",
       "userInfo": {
-        "image": "http://res.wisedu.com/scenes/public/images/demo/user1.png",
+       //"image": "http://res.wisedu.com/images/user.png",
         "info": [
           "01118888",
           "张晓明  男",
