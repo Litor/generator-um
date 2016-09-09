@@ -13,6 +13,11 @@ define(function(require, exports, module) {
     "DEBUG_MODE": true,
 
     /*
+      设置BH组件使用1.2版本
+     */
+    "BH_VERSION": '1.2',
+
+    /*
       资源服务器地址
      */
     "RESOURCE_SERVER": "http://res.wisedu.com",
@@ -65,7 +70,7 @@ define(function(require, exports, module) {
       "icons": ["icon-apps"],
       //"userImage": "http://res.wisedu.com/images/user.png",
       "userInfo": {
-       //"image": "http://res.wisedu.com/images/user.png",
+        //"image": "http://res.wisedu.com/images/user.png",
         "info": [
           "01118888",
           "张晓明  男",
