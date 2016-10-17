@@ -4,14 +4,16 @@ define(function(require) {
   var bs = require('./<%=moduleName %>BS');
 
   var viewConfig = {
-    initialize: function() {
-      var self = this;
-
-      this.initPropertyDialog();
-
-      this.eventMap = {
-
+    /********页面内事件通过eventMap统一管理********/
+    eventMap: function() {
+      return {
+        //'[data-action="编辑"]': this.actionEdit
       };
+    },
+
+    /********页面入口方法********/
+    initialize: function() {
+      this.initPropertyDialog();
     },
 
     initPropertyDialog: function() {

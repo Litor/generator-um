@@ -4,6 +4,14 @@ define(function(require) {
   var bs = require('./<%=moduleName %>BS');
 
   var viewConfig = {
+    /********页面内事件通过eventMap统一管理********/
+    eventMap: function() {
+      return {
+        //'[data-action="编辑"]': this.actionEdit
+      };
+    },
+
+    /********页面入口方法********/
     initialize: function() {
       var self = this;
       var indexView = utils.loadCompiledPage('<%=moduleName %>IndexPage', require);
@@ -18,9 +26,6 @@ define(function(require) {
       this.$rootElement.html(indexView.render({}), true);
       this.initForm();
 <%}%>
-      this.eventMap = {
-
-      };
     },
 
     initForm: function() {

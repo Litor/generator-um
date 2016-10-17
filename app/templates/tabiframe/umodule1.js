@@ -7,6 +7,14 @@ define(function(require) {
   //var sub1 = require('./sub1/sub1');
 
   var viewConfig = {
+    /********页面内事件通过eventMap统一管理********/
+    eventMap: function() {
+      return {
+        //'[data-action="编辑"]': this.actionEdit
+      };
+    },
+
+    /********页面入口方法********/
     initialize: function() {
       /********注册子页面********/
       //this.pushSubView([sub1]);
@@ -23,10 +31,6 @@ define(function(require) {
       this.$rootElement.html(indexView.render({}), true);
       this.initTab();
 <%}%>
-      /********页面内事件通过eventMap统一管理********/
-      this.eventMap = {
-        //'[data-action="添加"]': this.actionAdd
-      };
     },
 
     initTab: function() {
