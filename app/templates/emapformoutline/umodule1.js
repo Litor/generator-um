@@ -18,8 +18,9 @@ define(function(require) {
 <%if(isPaperDialog){ %>
       $.bhPaperPileDialog.show({
         content: indexView.render(),
-        render: function() {
+        render: function($header, $section, $footer, $aside) {
           self.initForm();
+          self.resetFormOutline($section);
         }
       });
 <%}else{%>
@@ -39,8 +40,8 @@ define(function(require) {
       });
     },
 
-    resetFormOutline: function() {
-      var $insertContainer = this.$rootElement.find('.<%=moduleName %>-form-container');
+    resetFormOutline: function($section) {
+      var $insertContainer = $section.find('.<%=moduleName %>-form-container');
 
       $.bhFormOutline.hide({
         destroy: true
@@ -56,7 +57,7 @@ define(function(require) {
 
       $.bhAffix({
         hostContainer: $insertContainer,
-        fixedContainer: this.$rootElement.find(".bh-form-outline")
+        fixedContainer: $section.find(".bh-form-outline")
       });
     }
   };
