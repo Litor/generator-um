@@ -30,6 +30,8 @@ define(function(require) {
 <%}else{%>
       this.$rootElement.html(indexView.render({}), true);
 <%}%>
+    }
+
   };
 
   return viewConfig;
