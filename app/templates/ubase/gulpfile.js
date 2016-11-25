@@ -50,32 +50,32 @@ gulp.task('generateConfigFile', function() {
 });
 
 gulp.task('generateMockFile', function() {
-  fs.writeFileSync('./dest/tempConfig.js', 'require.config({baseUrl: "./",paths: {"utils": "./dest/utils","configUtils": "./dest/configUtils","router": "./dest/router",}});');
-  fs.writeFileSync('./dest/utils.js', "define(function(require, exports, module) {return ''});");
-  fs.writeFileSync('./dest/configUtils.js', "define(function(require, exports, module) {return ''});");
-  fs.writeFileSync('./dest/router.js', "define(function(require, exports, module) {return ''});");
+  fs.writeFileSync('./public/build/tempConfig.js', 'require.config({baseUrl: "./",paths: {"utils": "./public/build/utils","configUtils": "./public/build/configUtils","router": "./public/build/router",}});');
+  fs.writeFileSync('./public/build/utils.js', "define(function(require, exports, module) {return ''});");
+  fs.writeFileSync('./public/build/configUtils.js', "define(function(require, exports, module) {return ''});");
+  fs.writeFileSync('./public/build/router.js', "define(function(require, exports, module) {return ''});");
 });
 
 gulp.task('mergeModules', function() {
   return gulp.src(["modules/**/*.js"])
     // Traces all modules and outputs them in the correct order.
     .pipe(amdOptimize.src("buildConfig", {
-      configFile: "./dest/tempConfig.js",
+      configFile: "./public/build/tempConfig.js",
       findNestedDependencies: false,
       exclude: ['configUtils', 'router', 'utils']
     }))
     .pipe(concat("app.js"))
-    .pipe(gulp.dest("dest/"));
+    .pipe(gulp.dest("./public/build/"));
 });
 
 gulp.task('removeConfigInApp', function() {
-  var fileContent = fs.readFileSync('./dest/app.js', "utf-8");
+  var fileContent = fs.readFileSync('./public/build/app.js', "utf-8");
   var realFileContent = '';
 
   var index = fileContent.indexOf("var ___divider____ = '___';");
   realFileContent = fileContent.substr(0, index);
 
-  fs.writeFileSync("./dest/app.js", realFileContent, "utf-8");
+  fs.writeFileSync("./public/build/app.js", realFileContent, "utf-8");
 });
 
 function getHtmlTeplate(basedir, output) {
@@ -114,21 +114,21 @@ gulp.task('template', function() {
     getHtmlTeplate('./public/commonpage/' + commonpage[j] + '/', output);
   }
 
-  fs.writeFileSync("./dest/template.js", output.join('\r'), "utf-8");
+  fs.writeFileSync("./public/build/template.js", output.join('\r'), "utf-8");
 });
 
 gulp.task('mergetemplate', function() {
-  return gulp.src(['./dest/template.js', './dest/configwrap.js', './dest/app.js'])
+  return gulp.src(['./public/build/template.js', './public/build/configwrap.js', './public/build/app.js'])
     .pipe(concat("package.js"))
     .pipe(uglify())
-    .pipe(gulp.dest("public/build/"));
+    .pipe(gulp.dest("./public/build/"));
 });
 
 gulp.task('buildappcss', function() {
   return gulp.src(['./public/css/base.css', './public/css/style.css'])
     .pipe(concat('all.css'))
     .pipe(minifyCss())
-    .pipe(gulp.dest("public/build/"));
+    .pipe(gulp.dest("./public/build/"));
 });
 
 gulp.task('generateFixedConfigFile', function() {
@@ -144,11 +144,11 @@ gulp.task('fixedConfigWrap', function() {
       findNestedDependencies: false
     }))
     .pipe(concat("configwrap.js"))
-    .pipe(gulp.dest("dest/"));
+    .pipe(gulp.dest("./public/build/"));
 });
 
 gulp.task('clearDest', function() {
-  return del(['buildConfig.js', 'dest/**/*', '!dest/package.js', '!dest/css/all.css', '!dest/appcore.js', '!dest/appcore-min.js', '!dest/commonlib.js']);
+  return del(['buildConfig.js', 'public/build/**/*', '!public/build/package.js', '!public/build/all.css', '!public/build/appcore.js', '!public/build/appcore-min.js', '!public/build/commonlib.js']);
 });
 
 gulp.task('build', function() {
