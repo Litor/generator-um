@@ -147,7 +147,7 @@ gulp.task('fixedConfigWrap', function() {
 });
 
 gulp.task('clearDest', function() {
-  return del(['buildConfig.js', 'dest/**/*', '!dest/package.js', '!dest/all.css', '!dest/appcore.js', '!dest/appcore-min.js', '!dest/commonlib.js']);
+  return del(['buildConfig.js', 'dest/**/*', '!dest/package.js', '!dest/css/all.css', '!dest/appcore.js', '!dest/appcore-min.js', '!dest/commonlib.js']);
 });
 
 gulp.task('build', function() {
