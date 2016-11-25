@@ -121,14 +121,14 @@ gulp.task('mergetemplate', function() {
   return gulp.src(['./dest/template.js', './dest/configwrap.js', './dest/app.js'])
     .pipe(concat("package.js"))
     .pipe(uglify())
-    .pipe(gulp.dest("dest/"));
+    .pipe(gulp.dest("public/build/"));
 });
 
 gulp.task('buildappcss', function() {
   return gulp.src(['./public/css/base.css', './public/css/style.css'])
     .pipe(concat('all.css'))
     .pipe(minifyCss())
-    .pipe(gulp.dest("dest/css/"));
+    .pipe(gulp.dest("public/build/"));
 });
 
 gulp.task('generateFixedConfigFile', function() {
