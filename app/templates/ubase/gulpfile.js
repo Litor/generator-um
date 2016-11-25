@@ -127,7 +127,7 @@ gulp.task('buildappcss', function() {
   return gulp.src(['./public/css/base.css', './public/css/style.css'])
     .pipe(concat('all.css'))
     .pipe(minifyCss())
-    .pipe(gulp.dest("dest/"));
+    .pipe(gulp.dest("dest/css/"));
 });
 
 gulp.task('generateFixedConfigFile', function() {
