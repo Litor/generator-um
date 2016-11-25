@@ -110,6 +110,7 @@ gulp.task('template', function() {
   }
 
   for (var j = 0; j < commonpage.length; j++) {
+    if (commonpage[j].indexOf('.') > 0) {continue;}
     getHtmlTeplate('./public/commonpage/' + commonpage[j] + '/', output);
   }
 
