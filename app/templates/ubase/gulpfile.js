@@ -89,9 +89,7 @@ function getHtmlTeplateInner(basedir, output, moduleDir) {
   if (moduleDir.indexOf('.html') > 0) {
     var fileName = moduleDir.substring(0, moduleDir.indexOf('.html'));
     var fileContent = fs.readFileSync(basedir + '/' + moduleDir, "utf-8");
-    fileContent = hogan.compile(fileContent, {
-      asString: true
-    });
+    fileContent = hogan.compile(fileContent);
     output.push('__Template["' + basedir + fileName + '"]=' + fileContent + ';');
   } else if (moduleDir.indexOf('.') === -1) {
     getHtmlTeplate(basedir + moduleDir + '/', output);
